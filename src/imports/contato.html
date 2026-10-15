@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — Torrense Construtora e Incorporadora</title>
+  <meta name="description" content="Entre em contato com a Torrense pelo WhatsApp e tire todas as suas dúvidas sobre nossos empreendimentos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* Estilos específicos da página de contato */
+    .contato-hero {
+      min-height: 100svh;
+      background: var(--clr-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-h) + var(--space-lg)) var(--space-md) var(--space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contato-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contato-hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .contato-hero__logo-mark {
+      font-size: 4rem;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .wa-btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      padding: 1.1rem 2.75rem;
+      background: #25D366;
+      color: #fff;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 30px rgba(37,211,102,.35);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .wa-btn-main:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(37,211,102,.45);
+    }
+
+    .wa-btn-main svg { width: 26px; height: 26px; flex-shrink: 0; }
+
+    .contato-channels {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem;
+      margin-top: var(--space-md);
+    }
+
+    .contato-channel {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem 1.5rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-sm);
+      color: var(--clr-gray-light);
+      font-size: .9rem;
+      transition: background var(--transition), border-color var(--transition);
+      min-width: 260px;
+      justify-content: flex-start;
+    }
+
+    .contato-channel:hover {
+      background: rgba(201,168,76,.1);
+      border-color: var(--clr-gold);
+      color: var(--clr-gold);
+    }
+
+    .contato-channel svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--clr-gold); }
+
+    .divider-or {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: rgba(255,255,255,.2);
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-block: var(--space-md);
+    }
+    .divider-or::before,
+    .divider-or::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,.1);
+    }
+
+    .horario-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(201,168,76,.15);
+      border: 1px solid rgba(201,168,76,.3);
+      color: var(--clr-gold);
+      font-size: .8rem;
+      letter-spacing: .06em;
+      padding: .4rem 1rem;
+      border-radius: 20px;
+      margin-top: var(--space-sm);
+    }
+  </style>
+</head>
+<body class="page-fade">
+
+  <!-- ══ NAV ══════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-text">
+          <span class="nav__logo-name">TORRENSE</span>
+          <span class="nav__logo-sub">Construtora &amp; Incorporadora</span>
+        </div>
+      </a>
+      <ul class="nav__links">
+        <li><a href="index.html"           class="nav__link">Home</a></li>
+        <li><a href="empreendimentos.html" class="nav__link">Empreendimentos</a></li>
+        <li><a href="quem-somos.html"      class="nav__link">Quem Somos</a></li>
+        <li><a href="contato.html"         class="nav__link">Contato</a></li>
+        <li>
+          <a href="https://wa.me/5515999999999" class="btn btn--gold nav__cta" target="_blank" rel="noopener">
+            Fale Conosco
+          </a>
+        </li>
+      </ul>
+      <button class="nav__hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__mobile">
+    <a href="index.html"           class="nav__mobile-link">Home</a>
+    <a href="empreendimentos.html" class="nav__mobile-link">Empreendimentos</a>
+    <a href="quem-somos.html"      class="nav__mobile-link">Quem Somos</a>
+    <a href="contato.html"         class="nav__mobile-link">Contato</a>
+    <a href="https://wa.me/5515999999999" class="btn btn--gold" target="_blank" rel="noopener" style="margin-top:.5rem;justify-content:center;">
+      Falar no WhatsApp
+    </a>
+  </div>
+
+  <!-- ══ CONTATO HERO ══════════════════════════════════════ -->
+  <section class="contato-hero">
+    <div class="contato-hero__content">
+
+      <span class="eyebrow" style="color:var(--clr-gold);font-size:.75rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;display:block;margin-bottom:1rem;">
+        Fale Conosco
+      </span>
+
+      <h1 style="color:var(--clr-white);margin-bottom:1rem;">
+        Estamos prontos<br>para te <em style="font-style:normal;color:var(--clr-gold);">atender</em>
+      </h1>
+
+      <p style="color:rgba(255,255,255,.7);font-size:1.05rem;max-width:480px;margin-inline:auto;margin-bottom:var(--space-md);">
+        A forma mais rápida e eficiente de falar com nossa equipe é pelo WhatsApp.
+        Clique abaixo e tire suas dúvidas em tempo real.
+      </p>
+
+      <!-- Botão principal WhatsApp -->
+      <a
+        href="https://wa.me/5515999999999?text=Ol%C3%A1%21+Acessei+o+site+da+Torrense+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+        class="wa-btn-main"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Falar com a Torrense pelo WhatsApp"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+        Iniciar Conversa no WhatsApp
+      </a>
+
+      <div class="horario-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Seg–Sex: 8h–18h &nbsp;|&nbsp; Sáb: 8h–12h
+      </div>
+
+      <!-- Divisor -->
+      <div class="divider-or">ou acesse por outro canal</div>
+
+      <!-- Canais alternativos -->
+      <div class="contato-channels">
+        <a href="tel:+5515999999999" class="contato-channel">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.58 1.28h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l.82-.82a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (15) 9 9999-9999
+        </a>
+
+        <a href="mailto:contato@torrense.com.br" class="contato-channel">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          contato@torrense.com.br
+        </a>
+
+        <div class="contato-channel" style="cursor:default;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Sorocaba, SP — Brasil
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ EMPREENDIMENTOS LINK ═══════════════════════════════ -->
+  <section class="section section--offwhite" style="text-align:center;">
+    <div class="container container--sm">
+      <span class="eyebrow" style="color:var(--clr-gold);font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:.5rem;">
+        Nosso Portfólio
+      </span>
+      <h2 style="margin-bottom:1rem;">Conheça nossos empreendimentos</h2>
+      <p style="color:var(--clr-gray);margin-bottom:var(--space-md);">
+        Antes de entrar em contato, explore nossos projetos e encontre o que mais se encaixa no seu perfil.
+      </p>
+      <a href="empreendimentos.html" class="btn btn--gold">Ver Todos os Empreendimentos →</a>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <span class="nav__logo-name">TORRENSE</span>
+          <p>Construtora e Incorporadora com tradição, qualidade e compromisso.</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Navegação</p>
+          <ul class="footer__links">
+            <li><a href="index.html"           class="footer__link">Home</a></li>
+            <li><a href="empreendimentos.html" class="footer__link">Empreendimentos</a></li>
+            <li><a href="quem-somos.html"      class="footer__link">Quem Somos</a></li>
+            <li><a href="contato.html"         class="footer__link">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Contato</p>
+          <ul class="footer__links">
+            <li><a href="tel:+5515999999999" class="footer__link">(15) 9 9999-9999</a></li>
+            <li><a href="mailto:contato@torrense.com.br" class="footer__link">contato@torrense.com.br</a></li>
+            <li><span class="footer__link">Sorocaba, SP</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        &copy; <span id="year"></span> Torrense Construtora e Incorporadora. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/empreendimentos.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empreendimentos — Torrense Construtora e Incorporadora</title>
+  <meta name="description" content="Conheça todos os empreendimentos Torrense: residenciais na planta, em construção e prontos para morar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page-fade">
+
+  <!-- ══ NAV ══════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-text">
+          <span class="nav__logo-name">TORRENSE</span>
+          <span class="nav__logo-sub">Construtora &amp; Incorporadora</span>
+        </div>
+      </a>
+      <ul class="nav__links">
+        <li><a href="index.html"           class="nav__link">Home</a></li>
+        <li><a href="empreendimentos.html" class="nav__link">Empreendimentos</a></li>
+        <li><a href="quem-somos.html"      class="nav__link">Quem Somos</a></li>
+        <li><a href="contato.html"         class="nav__link">Contato</a></li>
+        <li>
+          <a href="https://wa.me/5515999999999" class="btn btn--gold nav__cta" target="_blank" rel="noopener">
+            Fale Conosco
+          </a>
+        </li>
+      </ul>
+      <button class="nav__hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__mobile">
+    <a href="index.html"           class="nav__mobile-link">Home</a>
+    <a href="empreendimentos.html" class="nav__mobile-link">Empreendimentos</a>
+    <a href="quem-somos.html"      class="nav__mobile-link">Quem Somos</a>
+    <a href="contato.html"         class="nav__mobile-link">Contato</a>
+    <a href="https://wa.me/5515999999999" class="btn btn--gold" target="_blank" rel="noopener" style="margin-top:.5rem;justify-content:center;">
+      Falar no WhatsApp
+    </a>
+  </div>
+
+  <!-- ══ PAGE HERO ═════════════════════════════════════════ -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Portfólio Completo</span>
+      <h1>Nossos Empreendimentos</h1>
+      <p style="color:rgba(255,255,255,.7);margin-top:.75rem;max-width:480px;margin-inline:auto;">
+        Do lançamento ao pronto para morar — encontre o imóvel certo para você.
+      </p>
+    </div>
+  </header>
+
+  <!-- ══ CONTEÚDO ══════════════════════════════════════════ -->
+  <main class="section">
+    <div class="container">
+
+      <!-- Filtros de status -->
+      <div class="filters" role="group" aria-label="Filtrar empreendimentos">
+        <button class="filter-btn is-active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="na-planta">Na Planta</button>
+        <button class="filter-btn" data-filter="em-construcao">Em Construção</button>
+        <button class="filter-btn" data-filter="pronto">Prontos</button>
+      </div>
+
+      <!-- Grid de cards (injetado pelo JS) -->
+      <div class="grid-3" id="emp-grid">
+        <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--clr-gray);">
+          Carregando empreendimentos…
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ══ CTA CONTATO ═══════════════════════════════════════ -->
+  <section class="section section--dark" style="text-align:center;">
+    <div class="container container--sm">
+      <h2 style="color:var(--clr-white);margin-bottom:1rem;">
+        Não encontrou o que procura?
+      </h2>
+      <p style="color:#ccc;margin-bottom:var(--space-md);">
+        Entre em contato e nossos especialistas vão te ajudar a encontrar o empreendimento ideal.
+      </p>
+      <a
+        href="https://wa.me/5515999999999?text=Ol%C3%A1%21+Busco+um+im%C3%B3vel+Torrense+e+gostaria+de+mais+informa%C3%A7%C3%B5es."
+        class="btn btn--gold" target="_blank" rel="noopener"
+      >
+        Falar com Especialista
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <span class="nav__logo-name">TORRENSE</span>
+          <p>Construtora e Incorporadora com tradição, qualidade e compromisso.</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Navegação</p>
+          <ul class="footer__links">
+            <li><a href="index.html"           class="footer__link">Home</a></li>
+            <li><a href="empreendimentos.html" class="footer__link">Empreendimentos</a></li>
+            <li><a href="quem-somos.html"      class="footer__link">Quem Somos</a></li>
+            <li><a href="contato.html"         class="footer__link">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Contato</p>
+          <ul class="footer__links">
+            <li><a href="tel:+5515999999999" class="footer__link">(15) 9 9999-9999</a></li>
+            <li><a href="mailto:contato@torrense.com.br" class="footer__link">contato@torrense.com.br</a></li>
+            <li><span class="footer__link">Sorocaba, SP</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        &copy; <span id="year"></span> Torrense Construtora e Incorporadora. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/empreendimentos.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const grid = document.getElementById('emp-grid');
+    let currentFilter = 'todos';
+
+    function renderGrid(filter) {
+      const lista = filter === 'todos'
+        ? EMPREENDIMENTOS
+        : EMPREENDIMENTOS.filter(e => e.status === filter);
+
+      if (lista.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1;">
+            <h3>Nenhum empreendimento encontrado</h3>
+            <p>Tente outro filtro ou <a href="contato.html" style="color:var(--clr-gold)">entre em contato</a>.</p>
+          </div>`;
+        return;
+      }
+      grid.innerHTML = lista.map(renderEmpCard).join('');
+    }
+
+    // Filtros
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        currentFilter = btn.dataset.filter;
+        renderGrid(currentFilter);
+      });
+    });
+
+    // Render inicial
+    renderGrid('todos');
+  </script>
+</body>
+</html>
+

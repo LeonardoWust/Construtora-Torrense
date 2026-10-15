@@ -1,0 +1,91 @@
+# ===========================
+# Dependências
+# ===========================
+node_modules/
+.pnp
+.pnp.js
+
+# ===========================
+# Build / Output
+# ===========================
+dist/
+dist-ssr/
+build/
+out/
+
+# ===========================
+# Cache
+# ===========================
+.cache/
+.vite/
+.vite-temp/
+node_modules/.vite/
+node_modules/.vite-temp/
+vite.config.*.timestamp-*
+*.tsbuildinfo
+
+# ===========================
+# Variáveis de Ambiente
+# (nunca publicar senhas/chaves)
+# ===========================
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# ===========================
+# Logs
+# ===========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*-debug.log*
+
+# ===========================
+# OS
+# ===========================
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ===========================
+# Editores / IDEs
+# ===========================
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ===========================
+# Figma Make / Plataforma
+# ===========================
+/.figma/
+/.plugins/
+/.opencode-skills/
+.claude-replay.*
+.tmp-*
+plans/
+
+# ===========================
+# Lock files alternativos
+# (manter apenas o do gerenciador usado)
+# ===========================
+# Se usar pnpm, pode apagar o package-lock.json antes de commitar
+# package-lock.json
+
+# ===========================
+# Lock files alternativos
+# (manter apenas o do gerenciador usado)
+# ===========================
+# Se usar pnpm, pode apagar o package-lock.json antes de commitar
+# package-lock.json
+
