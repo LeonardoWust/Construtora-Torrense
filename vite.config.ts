@@ -2,8 +2,17 @@ import { defineConfig, type HtmlTagDescriptor, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
+import fs from 'node:fs'
 
-import siteConfiguration from './.figma/make/site.json'
+const currentDir = import.meta.dirname ?? path.resolve()
+const siteJsonPath = path.resolve(currentDir, './.figma/make/site.json')
+const siteConfiguration: FigmaSiteConfiguration = fs.existsSync(siteJsonPath)
+  ? JSON.parse(fs.readFileSync(siteJsonPath, 'utf-8'))
+  : {
+      title: 'Torrense - Construtora e Incorporadora',
+      description: 'Torrense Construtora e Incorporadora - Imóveis de alto e médio padrão em Sorocaba e região.',
+      language: 'pt-BR',
+    }
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -26,7 +35,7 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve(currentDir, './src'),
       },
     },
     server: {
