@@ -6,7 +6,7 @@ import { Empreendimento } from "../../data/empreendimentos";
 export default function AdminEmpreendimentoForm() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { empreendimentos, addEmpreendimento, updateEmpreendimento } = useEmpreendimentos();
+  const { empreendimentos, isLoading, error, addEmpreendimento, updateEmpreendimento } = useEmpreendimentos();
   const isEditing = Boolean(id);
 
   const [formData, setFormData] = useState<Omit<Empreendimento, "id">>({
@@ -25,8 +25,12 @@ export default function AdminEmpreendimentoForm() {
     whatsappMsg: "",
     destaque: false,
   });
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
 
   useEffect(() => {
+    if (isLoading || error) return;
+
     if (isEditing && id) {
       const emp = empreendimentos.find((e) => e.id === id);
       if (emp) {
@@ -35,7 +39,7 @@ export default function AdminEmpreendimentoForm() {
         navigate("/admin");
       }
     }
-  }, [id, isEditing, empreendimentos, navigate]);
+  }, [id, isEditing, empreendimentos, error, isLoading, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -126,8 +130,10 @@ export default function AdminEmpreendimentoForm() {
     setFormData({ ...formData, galeria: newGaleria });
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSaving(true);
+    setSaveError("");
     
     // Filter out empty diferenciais
     const cleanFormData = {
@@ -135,17 +141,23 @@ export default function AdminEmpreendimentoForm() {
       diferenciais: formData.diferenciais.filter(d => d.trim() !== "")
     };
 
-    if (isEditing && id) {
-      updateEmpreendimento(id, { ...cleanFormData, id } as Empreendimento);
-    } else {
-      const newId = cleanFormData.nome.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-      // Check if id exists
-      const idExists = empreendimentos.some(e => e.id === newId);
-      const finalId = idExists ? `${newId}-${Date.now()}` : newId;
-      
-      addEmpreendimento({ ...cleanFormData, id: finalId } as Empreendimento);
+    try {
+      if (isEditing && id) {
+        await updateEmpreendimento(id, { ...cleanFormData, id } as Empreendimento);
+      } else {
+        const newId = cleanFormData.nome.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+        const idExists = empreendimentos.some(e => e.id === newId);
+        const finalId = idExists ? `${newId}-${Date.now()}` : newId;
+
+        await addEmpreendimento({ ...cleanFormData, id: finalId } as Empreendimento);
+      }
+      navigate("/admin");
+    } catch (error) {
+      console.error("Não foi possível salvar o empreendimento:", error);
+      setSaveError(error instanceof Error ? error.message : "Ocorreu um erro ao salvar. Tente novamente.");
+    } finally {
+      setIsSaving(false);
     }
-    navigate("/admin");
   };
 
   const inputStyle = { width: "100%", padding: ".75rem", border: "1px solid #ccc", borderRadius: "4px", marginBottom: "1rem" };
@@ -154,6 +166,7 @@ export default function AdminEmpreendimentoForm() {
 
   return (
     <div>
+      {isLoading && <p role="status">Carregando empreendimentos...</p>}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <h1>{isEditing ? "Editar Empreendimento" : "Novo Empreendimento"}</h1>
         <button type="button" onClick={() => navigate("/admin")} style={{ padding: ".5rem 1rem", backgroundColor: "#6b7280", color: "#fff", border: "none", borderRadius: "4px", cursor: "pointer" }}>
@@ -161,7 +174,8 @@ export default function AdminEmpreendimentoForm() {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      {!isLoading && <form onSubmit={handleSubmit}>
+        {saveError && <p role="alert" style={{ ...sectionStyle, color: "#b91c1c" }}>{saveError}</p>}
         <div style={sectionStyle}>
           <h2>Informações Gerais</h2>
           
@@ -259,11 +273,10 @@ export default function AdminEmpreendimentoForm() {
           </div>
         </div>
 
-        <button type="submit" className="btn btn--gold" style={{ padding: "1rem 2rem", fontSize: "1.1rem" }}>
-          Salvar Empreendimento
+        <button type="submit" className="btn btn--gold" disabled={isSaving} style={{ padding: "1rem 2rem", fontSize: "1.1rem" }}>
+          {isSaving ? "Salvando..." : "Salvar Empreendimento"}
         </button>
-      </form>
+      </form>}
     </div>
   );
 }
-

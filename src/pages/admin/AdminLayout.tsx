@@ -5,9 +5,14 @@ export default function AdminLayout() {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch (error) {
+      console.error("Não foi possível encerrar a sessão administrativa:", error);
+      window.alert("Não foi possível encerrar a sessão. Tente novamente.");
+    }
   };
 
   return (
@@ -37,4 +42,3 @@ export default function AdminLayout() {
     </div>
   );
 }
-
