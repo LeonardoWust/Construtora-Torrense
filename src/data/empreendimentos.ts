@@ -3,6 +3,7 @@ export interface Empreendimento {
   nome: string;
   status: "na-planta" | "em-construcao" | "pronto";
   cidade: string;
+  bairro?: string;
   metragem: string;
   dormitorios: string;
   vagas: string;
@@ -22,6 +23,7 @@ export const EMPREENDIMENTOS: Empreendimento[] = [
     nome: "Residencial Vila Nova",
     status: "na-planta",
     cidade: "Sorocaba, SP",
+    bairro: "Vila Nova",
     metragem: "70 a 100 m²",
     dormitorios: "2 e 3 dorm.",
     vagas: "1 a 2 vagas",
@@ -43,6 +45,7 @@ export const EMPREENDIMENTOS: Empreendimento[] = [
     nome: "Jardim Sorocaba",
     status: "em-construcao",
     cidade: "Sorocaba, SP",
+    bairro: "Jardim América",
     metragem: "80 a 120 m²",
     dormitorios: "3 dorm. (1 suíte)",
     vagas: "2 vagas",
@@ -63,6 +66,7 @@ export const EMPREENDIMENTOS: Empreendimento[] = [
     nome: "Alto das Torres",
     status: "pronto",
     cidade: "Itu, SP",
+    bairro: "Parque das Torres",
     metragem: "90 a 140 m²",
     dormitorios: "3 e 4 dorm.",
     vagas: "2 a 3 vagas",

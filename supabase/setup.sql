@@ -3,6 +3,7 @@ create table if not exists public.empreendimentos (
   nome text not null,
   status text not null check (status in ('na-planta', 'em-construcao', 'pronto')),
   cidade text not null,
+  bairro text not null default '',
   metragem text not null default '',
   dormitorios text not null default '',
   vagas text not null default '',
@@ -55,13 +56,14 @@ create policy "Authenticated admins can delete empreendimentos"
   using (public.is_admin());
 
 insert into public.empreendimentos
-  (id, nome, status, cidade, metragem, dormitorios, vagas, andares, unidades, descricao, diferenciais, galeria, whatsapp, whatsapp_msg, destaque)
+  (id, nome, status, cidade, bairro, metragem, dormitorios, vagas, andares, unidades, descricao, diferenciais, galeria, whatsapp, whatsapp_msg, destaque)
 values
   (
     'residencial-vila-nova',
     'Residencial Vila Nova',
     'na-planta',
     'Sorocaba, SP',
+    'Vila Nova',
     '70 a 100 m²',
     '2 e 3 dorm.',
     '1 a 2 vagas',
@@ -79,6 +81,7 @@ values
     'Jardim Sorocaba',
     'em-construcao',
     'Sorocaba, SP',
+    'Jardim América',
     '80 a 120 m²',
     '3 dorm. (1 suíte)',
     '2 vagas',
@@ -96,6 +99,7 @@ values
     'Alto das Torres',
     'pronto',
     'Itu, SP',
+    'Parque das Torres',
     '90 a 140 m²',
     '3 e 4 dorm.',
     '2 a 3 vagas',
