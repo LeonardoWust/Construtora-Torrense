@@ -13,6 +13,7 @@ export default function AdminEmpreendimentoForm() {
     nome: "",
     status: "na-planta",
     cidade: "",
+    bairro: "",
     metragem: "",
     dormitorios: "",
     vagas: "",
@@ -34,7 +35,10 @@ export default function AdminEmpreendimentoForm() {
     if (isEditing && id) {
       const emp = empreendimentos.find((e) => e.id === id);
       if (emp) {
-        setFormData(emp);
+        setFormData({
+          ...emp,
+          bairro: emp.bairro || "",
+        });
       } else {
         navigate("/admin");
       }
@@ -182,8 +186,16 @@ export default function AdminEmpreendimentoForm() {
           <label style={labelStyle}>Nome</label>
           <input style={inputStyle} name="nome" value={formData.nome} onChange={handleChange} required />
           
-          <label style={labelStyle}>Cidade</label>
-          <input style={inputStyle} name="cidade" value={formData.cidade} onChange={handleChange} required />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div>
+              <label style={labelStyle}>Cidade</label>
+              <input style={inputStyle} name="cidade" value={formData.cidade} onChange={handleChange} placeholder="Ex: Sorocaba, SP" required />
+            </div>
+            <div>
+              <label style={labelStyle}>Bairro</label>
+              <input style={inputStyle} name="bairro" value={formData.bairro || ""} onChange={handleChange} placeholder="Ex: Campolim, Centro" />
+            </div>
+          </div>
           
           <label style={labelStyle}>Status</label>
           <select style={inputStyle} name="status" value={formData.status} onChange={handleChange}>

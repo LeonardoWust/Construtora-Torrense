@@ -3,7 +3,7 @@ import { useEmpreendimentos } from "../../context/EmpreendimentosContext";
 import { STATUS_LABEL } from "../../data/empreendimentos";
 
 export default function AdminEmpreendimentos() {
-  const { empreendimentos, isLoading, removeEmpreendimento, importLocalEmpreendimentos } = useEmpreendimentos();
+  const { empreendimentos, isLoading, removeEmpreendimento, importLocalEmpreendimentos, isLocalMode } = useEmpreendimentos();
 
   const handleDelete = async (id: string, nome: string) => {
     if (window.confirm(`Tem certeza que deseja excluir "${nome}"?`)) {
@@ -33,10 +33,16 @@ export default function AdminEmpreendimentos() {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <h1>Empreendimentos</h1>
-        <div style={{ display: "flex", gap: ".75rem" }}>
-          <button type="button" onClick={handleImport} disabled={isLoading} className="btn" style={{ backgroundColor: "#e5e7eb", padding: ".5rem 1rem" }}>
-            Importar dados deste navegador
-          </button>
+        <div style={{ display: "flex", gap: ".75rem", alignItems: "center" }}>
+          {!isLocalMode ? (
+            <button type="button" onClick={handleImport} disabled={isLoading} className="btn" style={{ backgroundColor: "#e5e7eb", padding: ".5rem 1rem" }}>
+              Importar dados deste navegador
+            </button>
+          ) : (
+            <span style={{ padding: ".4rem .8rem", backgroundColor: "#fef3c7", color: "#92400e", borderRadius: "4px", fontSize: ".85rem" }}>
+              💾 Modo Local (Navegador)
+            </span>
+          )}
           <Link to="/admin/novo" className="btn btn--gold">
             + Novo Empreendimento
           </Link>
@@ -48,7 +54,7 @@ export default function AdminEmpreendimentos() {
           <thead style={{ backgroundColor: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
             <tr>
               <th style={{ padding: "1rem", textAlign: "left", color: "#4b5563" }}>Nome</th>
-              <th style={{ padding: "1rem", textAlign: "left", color: "#4b5563" }}>Cidade</th>
+              <th style={{ padding: "1rem", textAlign: "left", color: "#4b5563" }}>Localização</th>
               <th style={{ padding: "1rem", textAlign: "left", color: "#4b5563" }}>Status</th>
               <th style={{ padding: "1rem", textAlign: "left", color: "#4b5563" }}>Destaque</th>
               <th style={{ padding: "1rem", textAlign: "right", color: "#4b5563" }}>Ações</th>
@@ -65,7 +71,7 @@ export default function AdminEmpreendimentos() {
             {empreendimentos.map((emp) => (
               <tr key={emp.id} style={{ borderBottom: "1px solid #e5e7eb" }}>
                 <td style={{ padding: "1rem" }}>{emp.nome}</td>
-                <td style={{ padding: "1rem" }}>{emp.cidade}</td>
+                <td style={{ padding: "1rem" }}>{emp.bairro ? `${emp.bairro}, ${emp.cidade}` : emp.cidade}</td>
                 <td style={{ padding: "1rem" }}>{STATUS_LABEL[emp.status] || emp.status}</td>
                 <td style={{ padding: "1rem" }}>{emp.destaque ? "Sim" : "Não"}</td>
                 <td style={{ padding: "1rem", textAlign: "right", display: "flex", justifyContent: "flex-end", gap: ".5rem" }}>

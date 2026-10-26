@@ -6,6 +6,7 @@ interface EmpreendimentosContextType {
   empreendimentos: Empreendimento[];
   isLoading: boolean;
   error: string | null;
+  isLocalMode: boolean;
   addEmpreendimento: (emp: Empreendimento) => Promise<void>;
   updateEmpreendimento: (id: string, emp: Empreendimento) => Promise<void>;
   removeEmpreendimento: (id: string) => Promise<void>;
@@ -17,6 +18,7 @@ interface EmpreendimentoRow {
   nome: string;
   status: Empreendimento["status"];
   cidade: string;
+  bairro?: string;
   metragem: string;
   dormitorios: string;
   vagas: string;
@@ -39,6 +41,7 @@ const toRow = (emp: Empreendimento): EmpreendimentoRow => ({
   nome: emp.nome,
   status: emp.status,
   cidade: emp.cidade,
+  bairro: emp.bairro || "",
   metragem: emp.metragem,
   dormitorios: emp.dormitorios,
   vagas: emp.vagas,
@@ -57,6 +60,7 @@ const fromRow = (row: EmpreendimentoRow): Empreendimento => ({
   nome: row.nome,
   status: row.status,
   cidade: row.cidade,
+  bairro: row.bairro || "",
   metragem: row.metragem,
   dormitorios: row.dormitorios,
   vagas: row.vagas,
@@ -102,7 +106,7 @@ async function removeUploadedFiles(paths: string[]) {
 }
 
 const uploadGallery = async (emp: Empreendimento) => {
-  if (!supabase) throw new Error("Configure o Supabase antes de salvar empreendimentos.");
+  if (!supabase) return { empreendimento: emp, uploadedPaths: [] };
 
   const uploadedPaths: string[] = [];
   const galeria: Empreendimento["galeria"] = [];
@@ -140,11 +144,22 @@ const uploadGallery = async (emp: Empreendimento) => {
 };
 
 export const EmpreendimentosProvider = ({ children }: { children: ReactNode }) => {
-  const [empreendimentos, setEmpreendimentos] = useState<Empreendimento[]>(supabase ? [] : INITIAL_DATA);
+  const [empreendimentos, setEmpreendimentos] = useState<Empreendimento[]>(() => {
+    if (supabase) return [];
+    try {
+      const saved = localStorage.getItem(LEGACY_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {
+      console.error("Erro ao ler empreendimentos locais:", e);
+    }
+    return INITIAL_DATA;
+  });
+
   const [isLoading, setIsLoading] = useState(Boolean(supabase));
-  const [errorMessage, setErrorMessage] = useState<string | null>(
-    supabase ? null : "Supabase não configurado. O site está mostrando apenas os empreendimentos de demonstração.",
-  );
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const client = supabase;
@@ -171,7 +186,12 @@ export const EmpreendimentosProvider = ({ children }: { children: ReactNode }) =
   }, []);
 
   const addEmpreendimento = async (emp: Empreendimento) => {
-    if (!supabase) throw new Error("Configure o Supabase antes de salvar empreendimentos.");
+    if (!supabase) {
+      const updated = [emp, ...empreendimentos];
+      setEmpreendimentos(updated);
+      localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(updated));
+      return;
+    }
 
     const { empreendimento, uploadedPaths } = await uploadGallery(emp);
     const { error } = await supabase.from("empreendimentos").insert(toRow(empreendimento));
@@ -183,7 +203,12 @@ export const EmpreendimentosProvider = ({ children }: { children: ReactNode }) =
   };
 
   const updateEmpreendimento = async (id: string, emp: Empreendimento) => {
-    if (!supabase) throw new Error("Configure o Supabase antes de salvar empreendimentos.");
+    if (!supabase) {
+      const updated = empreendimentos.map((item) => (item.id === id ? emp : item));
+      setEmpreendimentos(updated);
+      localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(updated));
+      return;
+    }
 
     const { empreendimento, uploadedPaths } = await uploadGallery(emp);
     const { error } = await supabase.from("empreendimentos").update(toRow(empreendimento)).eq("id", id).select("id").single();
@@ -195,7 +220,12 @@ export const EmpreendimentosProvider = ({ children }: { children: ReactNode }) =
   };
 
   const removeEmpreendimento = async (id: string) => {
-    if (!supabase) throw new Error("Configure o Supabase antes de excluir empreendimentos.");
+    if (!supabase) {
+      const updated = empreendimentos.filter((item) => item.id !== id);
+      setEmpreendimentos(updated);
+      localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(updated));
+      return;
+    }
 
     const { error } = await supabase.from("empreendimentos").delete().eq("id", id);
     if (error) throw error;
@@ -203,7 +233,7 @@ export const EmpreendimentosProvider = ({ children }: { children: ReactNode }) =
   };
 
   const importLocalEmpreendimentos = async () => {
-    if (!supabase) throw new Error("Configure o Supabase antes de importar empreendimentos.");
+    if (!supabase) throw new Error("Configure o Supabase no arquivo .env.local antes de importar empreendimentos.");
 
     const saved = localStorage.getItem(LEGACY_STORAGE_KEY);
     if (!saved) return 0;
@@ -235,6 +265,7 @@ export const EmpreendimentosProvider = ({ children }: { children: ReactNode }) =
       empreendimentos,
       isLoading,
       error: errorMessage,
+      isLocalMode: !Boolean(supabase),
       addEmpreendimento,
       updateEmpreendimento,
       removeEmpreendimento,
@@ -257,3 +288,4 @@ export const useEmpreendimentos = () => {
   }
   return context;
 };
+

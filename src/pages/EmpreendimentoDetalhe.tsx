@@ -37,7 +37,7 @@ export default function EmpreendimentoDetalhe() {
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1rem", marginBottom: ".75rem" }}>
               <span className={"emp-card__status " + statusClass} style={{ position: "static" }}>{statusLabel}</span>
               <span style={{ fontSize: ".8rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--clr-gold)", fontWeight: 700 }}>
-                {emp.cidade}
+                {emp.bairro ? `${emp.bairro} — ${emp.cidade}` : emp.cidade}
               </span>
             </div>
             <h1>{emp.nome}</h1>
@@ -87,12 +87,13 @@ export default function EmpreendimentoDetalhe() {
               <div className="ficha">
                 <h4 className="ficha__title">Ficha Técnica</h4>
                 {[
+                  ["Cidade", emp.cidade],
+                  ["Bairro", emp.bairro || "—"],
                   ["Metragem", emp.metragem],
                   ["Dormitórios", emp.dormitorios],
                   ["Vagas", emp.vagas],
                   ["Andares", emp.andares],
                   ["Unidades", emp.unidades],
-                  ["Cidade", emp.cidade],
                   ["Status", statusLabel],
                 ].map(([k, v]) => (
                   <div key={k} className="ficha__row">

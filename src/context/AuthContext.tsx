@@ -11,9 +11,14 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const LOCAL_AUTH_KEY = "construtora_local_auth";
+const ADMIN_PASSWORD = "16981698";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
+  const [isLocalAuth, setIsLocalAuth] = useState<boolean>(() => {
+    return sessionStorage.getItem(LOCAL_AUTH_KEY) === "true";
+  });
   const [isLoading, setIsLoading] = useState(Boolean(supabase));
 
   useEffect(() => {
@@ -42,7 +47,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    if (!supabase) throw new Error("Supabase ainda não foi configurado neste projeto.");
+    if (!supabase) {
+      if (password === ADMIN_PASSWORD) {
+        sessionStorage.setItem(LOCAL_AUTH_KEY, "true");
+        setIsLocalAuth(true);
+        return;
+      }
+      throw new Error("Senha incorreta. (Senha padrão local: 16981698)");
+    }
 
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
@@ -53,15 +65,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
-    if (!supabase) return;
+    if (!supabase) {
+      sessionStorage.removeItem(LOCAL_AUTH_KEY);
+      setIsLocalAuth(false);
+      return;
+    }
 
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   };
 
+  const isAuthenticated = supabase
+    ? session?.user.app_metadata.role === "admin"
+    : isLocalAuth;
+
   return (
     <AuthContext.Provider value={{
-      isAuthenticated: session?.user.app_metadata.role === "admin",
+      isAuthenticated,
       isLoading,
       isConfigured: Boolean(supabase),
       login,
@@ -79,3 +99,4 @@ export const useAuth = () => {
   }
   return context;
 };
+

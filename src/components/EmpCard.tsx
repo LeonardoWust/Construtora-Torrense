@@ -19,7 +19,7 @@ export default function EmpCard({ emp }: Props) {
         </span>
       </div>
       <div className="emp-card__body">
-        <p className="emp-card__city">{emp.cidade}</p>
+        <p className="emp-card__city">{emp.bairro ? `${emp.bairro} — ${emp.cidade}` : emp.cidade}</p>
         <h3 className="emp-card__name">{emp.nome}</h3>
         <div className="emp-card__specs">
           <span className="emp-card__spec">{emp.metragem}</span>
