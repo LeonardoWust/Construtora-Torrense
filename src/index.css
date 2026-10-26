@@ -497,10 +497,11 @@ em { font-style: italic; color: var(--clr-gold); }
 .emp-detail__header { margin-bottom: var(--space-md); }
 .emp-detail__grid {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: minmax(0, 1fr) 340px;
   gap: 3rem;
   align-items: start;
 }
+.emp-detail__grid > div:first-child { min-width: 0; }
 @media (max-width: 900px) {
   .emp-detail__grid { grid-template-columns: 1fr; }
 }

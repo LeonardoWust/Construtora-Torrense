@@ -28,6 +28,8 @@ const css = `
     display: flex;
     flex-direction: column;
     gap: .75rem;
+    min-width: 0;
+    max-width: 100%;
   }
 
   /* ── Main image ── */
@@ -42,6 +44,7 @@ const css = `
   .empg__main-img {
     width: 100%;
     height: 100%;
+    max-width: 100%;
     object-fit: cover;
     display: block;
     transition: opacity .25s ease;
